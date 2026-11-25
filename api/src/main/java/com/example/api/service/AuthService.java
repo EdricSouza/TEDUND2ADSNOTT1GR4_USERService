@@ -1,7 +1,13 @@
 package com.example.api.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
+import org.springframework.security.oauth2.core.OAuth2Error;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.api.dto.UsuarioResponseDTO;
 
@@ -28,6 +34,33 @@ public class AuthService {
         usuarioService.atualizarUltimoAcesso(usuario.getId());
 
         return "Login bem-sucedido";
+    }
+
+    // @Transactional(readOnly = true)
+    // public JwtAuthenticationToken autenticarToken(Jwt jwt) {
+    //     int id;
+
+    //     try { 
+    //         id = Integer.parseInt(jwt.getSubject()); 
+    //     }
+
+    //     catch (NumberFormatException exception) { 
+    //         throw tokenInvalido(); 
+    //     }
+
+    //     UsuarioResponseDTO usuario = usuarioService.getUsuarioById(id);
+
+    //     var perfis = usuario.getNomesPerfisAutorizados();
+
+    //     if (!usuario.getStatus() || perfis.isEmpty()) throw tokenInvalido();
+
+    //     var authorities = perfis.stream().map(p -> new SimpleGrantedAuthority("ROLE_" + p)).toList();
+
+    //     return new JwtAuthenticationToken(jwt, authorities, Long.toString(id));
+    // }
+
+    private static OAuth2AuthenticationException tokenInvalido() {
+        return new OAuth2AuthenticationException(new OAuth2Error("invalid_token"), "Sessão inválida.");
     }
 
 }
