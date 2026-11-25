@@ -1,5 +1,7 @@
 package com.example.api.service;
 
+import java.util.NoSuchElementException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +33,34 @@ public class UsuarioService {
         usuarioEntity.setSenha(senhaService.gerarHash(usuario.getSenha()));
 
         return usuarioRepository.save(usuarioEntity);
+    }
+
+    public Usuario updateUsuario(int id, UsuarioRequestDTO usuario) {
+        Usuario usuarioEntity = usuarioRepository.findById(id).get();
+
+        usuarioEntity.setNome(usuario.getNome());
+        usuarioEntity.setEmail(usuario.getEmail());
+        usuarioEntity.setIdClinica(usuario.getIdClinica());
+        usuarioEntity.setStatus(usuario.getStatus());
+
+        return usuarioRepository.save(usuarioEntity);
+    }
+
+    public Usuario updateUsuarioStatus(int id, boolean status) {
+        Usuario usuario = usuarioRepository.findById(id)
+            .orElseThrow(() -> new NoSuchElementException("Usuário não encontrado"));
+
+        usuario.setStatus(status);
+        return usuarioRepository.save(usuario);
+    }
+
+    public UsuarioResponseDTO deleteUsuario(int id) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Usuário não encontrado"));
+
+        usuarioRepository.delete(usuario);
+
+        return UsuarioMapper.toResponse(usuario);
     }
 
 }
