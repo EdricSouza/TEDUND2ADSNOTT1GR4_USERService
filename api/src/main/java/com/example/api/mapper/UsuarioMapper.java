@@ -15,6 +15,7 @@ public class UsuarioMapper {
             usuario.getId(),
             usuario.getNome(),
             usuario.getEmail(),
+            usuario.getSenha(),
             usuario.getDataCadastro(),
             usuario.getDataUltimoAcesso(),
             usuario.getIdClinica(),

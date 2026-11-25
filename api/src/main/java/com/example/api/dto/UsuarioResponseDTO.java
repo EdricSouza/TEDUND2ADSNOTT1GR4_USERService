@@ -7,109 +7,117 @@ public class UsuarioResponseDTO {
     public UsuarioResponseDTO() {
     }
 
-    public UsuarioResponseDTO(Long id, String nome, String email, Instant dataCadastro, Instant dataUltimoAcesso,
+    public UsuarioResponseDTO(Long id, String nome, String email, String senha, Instant dataCadastro, Instant dataUltimoAcesso,
             int idClinica, boolean status, String motivoInatividade, Instant dataInatividade) {
-        Id = id;
-        Nome = nome;
-        Email = email;
-        DataCadastro = dataCadastro;
-        DataUltimoAcesso = dataUltimoAcesso;
-        IdClinica = idClinica;
-        Status = status;
-        MotivoInatividade = motivoInatividade;
-        DataInatividade = dataInatividade;
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.dataCadastro = dataCadastro;
+        this.dataUltimoAcesso = dataUltimoAcesso;
+        this.idClinica = idClinica;
+        this.status = status;
+        this.motivoInatividade = motivoInatividade;
+        this.dataInatividade = dataInatividade;
     }
 
-    private Long Id;
+    private Long id;
 
-    private String Nome;
+    private String nome;
 
-    private String Email;
+    private String email;
 
-    private Instant DataCadastro;
+    private String senha;
 
-    private Instant DataUltimoAcesso;
+    private Instant dataCadastro;
 
-    private int IdClinica;
+    private Instant dataUltimoAcesso;
 
-    private boolean Status;
+    private int idClinica;
 
-    private String MotivoInatividade;
+    private boolean status;
 
-    private Instant DataInatividade;
+    private String motivoInatividade;
+
+    private Instant dataInatividade;
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getNome() {
-        return Nome;
+        return nome;
     }
 
     public void setNome(String nome) {
-        Nome = nome;
+        this.nome = nome;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     public Instant getDataCadastro() {
-        return DataCadastro;
+        return dataCadastro;
     }
 
     public void setDataCadastro(Instant dataCadastro) {
-        DataCadastro = dataCadastro;
+        this.dataCadastro = dataCadastro;
     }
 
     public Instant getDataUltimoAcesso() {
-        return DataUltimoAcesso;
+        return dataUltimoAcesso;
     }
 
     public void setDataUltimoAcesso(Instant dataUltimoAcesso) {
-        DataUltimoAcesso = dataUltimoAcesso;
+        this.dataUltimoAcesso = dataUltimoAcesso;
     }
 
     public int getIdClinica() {
-        return IdClinica;
+        return idClinica;
     }
 
     public void setIdClinica(int idClinica) {
-        IdClinica = idClinica;
+        this.idClinica = idClinica;
     }
 
     public boolean getStatus() {
-        return Status;
+        return status;
     }
 
     public void setStatus(boolean status) {
-        Status = status;
+        this.status = status;
     }
 
     public String getMotivoInatividade() {
-        return MotivoInatividade;
+        return motivoInatividade;
     }
 
     public void setMotivoInatividade(String motivoInatividade) {
-        MotivoInatividade = motivoInatividade;
+        this.motivoInatividade = motivoInatividade;
     }
 
     public Instant getDataInatividade() {
-        return DataInatividade;
+        return dataInatividade;
     }
 
     public void setDataInatividade(Instant dataInatividade) {
-        DataInatividade = dataInatividade;
+        this.dataInatividade = dataInatividade;
     }
 
-    
+    public String getSenha() {
+        return senha;
+    }
 
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 }

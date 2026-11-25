@@ -1,6 +1,8 @@
 package com.example.api.service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,9 +22,22 @@ public class UsuarioService {
     @Autowired
     private SenhaService senhaService;
 
-    public UsuarioResponseDTO getUsuarioRepository(int id) {
+    public UsuarioResponseDTO getUsuarioById(int id) {
         Usuario usuario = usuarioRepository.findById(id).get();
         return UsuarioMapper.toResponse(usuario);
+    }
+
+    public UsuarioResponseDTO getUsuarioByEmail(String email) {
+        Usuario usuario = usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new NoSuchElementException("Usuário não encontrado"));
+        return UsuarioMapper.toResponse(usuario);
+    }
+
+    public List<UsuarioResponseDTO> getUsuarioByIdClinica(int idClinica) {
+        List<Usuario> usuarios = usuarioRepository.findByIdClinica(idClinica);
+        return usuarios.stream()
+                .map(UsuarioMapper::toResponse)
+                .collect(Collectors.toList());
     }
 
     public Usuario createUsuario(UsuarioRequestDTO usuario) {
@@ -61,6 +76,11 @@ public class UsuarioService {
         usuarioRepository.delete(usuario);
 
         return UsuarioMapper.toResponse(usuario);
+    }
+
+    public void atualizarUltimoAcesso(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'atualizarUltimoAcesso'");
     }
 
 }

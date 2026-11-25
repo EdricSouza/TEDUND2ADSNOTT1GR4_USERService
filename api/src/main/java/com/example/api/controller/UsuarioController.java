@@ -1,5 +1,6 @@
 package com.example.api.controller;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,13 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @GetMapping("/{id}")    
-    public UsuarioResponseDTO getUsuario(@PathVariable  int id) {
-        return usuarioService.getUsuarioRepository(id);
+    public UsuarioResponseDTO getUsuario (@PathVariable  int id) {
+        return usuarioService.getUsuarioById(id);
+    }
+
+    @GetMapping("/clinica/{idClinica}")
+    public List<UsuarioResponseDTO> getUsuarioByClinica (@PathVariable int idClinica) {
+        return usuarioService.getUsuarioByIdClinica(idClinica);
     }
 
     @PostMapping

@@ -15,5 +15,10 @@ public class AuthController {
     public AuthController(AuthService authService) {
         this.authService = authService;
     }
+
+    @PostMapping("/login")
+    public String login(@RequestParam String email, @RequestParam String senha) {
+        return authService.login(email, senha);
+    }
     
 }
