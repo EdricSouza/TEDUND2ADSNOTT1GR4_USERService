@@ -1,13 +1,9 @@
 package com.example.api.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.OAuth2Error;
-import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.example.api.dto.UsuarioResponseDTO;
 
@@ -31,7 +27,10 @@ public class AuthService {
             throw new RuntimeException("Usuário não encontrado ou senha inválida");
         }
 
-        usuarioService.atualizarUltimoAcesso(usuario.getId());
+        Long id = usuario.getId();
+        usuarioService.atualizarUltimoAcesso(id.intValue());
+
+        
 
         return "Login bem-sucedido";
     }

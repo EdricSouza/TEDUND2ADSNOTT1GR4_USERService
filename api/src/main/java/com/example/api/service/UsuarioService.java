@@ -78,9 +78,12 @@ public class UsuarioService {
         return UsuarioMapper.toResponse(usuario);
     }
 
-    public void atualizarUltimoAcesso(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'atualizarUltimoAcesso'");
+    public Usuario atualizarUltimoAcesso(int id) {
+        Usuario usuario = usuarioRepository.findById(id)
+            .orElseThrow(() -> new NoSuchElementException("Usuário não encontrado"));
+
+        usuario.setDataUltimoAcesso(java.time.Instant.now());
+        return usuarioRepository.save(usuario);
     }
 
 }
