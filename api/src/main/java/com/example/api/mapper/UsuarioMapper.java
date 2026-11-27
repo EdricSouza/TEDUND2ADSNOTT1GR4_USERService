@@ -11,7 +11,7 @@ public class UsuarioMapper {
     }
 
     public static UsuarioResponseDTO toResponse(Usuario usuario) {
-        return new UsuarioResponseDTO(
+        UsuarioResponseDTO response = new UsuarioResponseDTO(
             usuario.getId(),
             usuario.getNome(),
             usuario.getEmail(),
@@ -23,6 +23,8 @@ public class UsuarioMapper {
             usuario.getMotivoInatividade(),
             usuario.getDataInatividade()
         );
+        response.setPerfilId(usuario.getPerfilId());
+        return response;
     }
 
     public static Usuario toRequest(UsuarioRequestDTO request) {
@@ -31,6 +33,7 @@ public class UsuarioMapper {
         usuario.setNome(request.getNome());
         usuario.setEmail(request.getEmail());
         usuario.setIdClinica(request.getIdClinica());
+        usuario.setPerfilId(request.getPerfilId());
         usuario.setStatus(true);
 
         return usuario;

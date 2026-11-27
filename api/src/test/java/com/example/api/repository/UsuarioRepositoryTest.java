@@ -12,7 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.api.entity.Usuario;
 
-@SpringBootTest(properties = "spring.datasource.url=jdbc:h2:mem:usuarios_test;DB_CLOSE_DELAY=-1")
+@SpringBootTest(properties = {
+    "spring.datasource.url=jdbc:h2:mem:usuarios_test;DB_CLOSE_DELAY=-1",
+    "app.auth.jwt-secret=chave-apenas-para-testes-com-32-bytes"
+})
 @Transactional
 class UsuarioRepositoryTest {
 

@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.example.api.dto.UsuarioRequestDTO;
 import com.example.api.dto.UsuarioResponseDTO;
@@ -21,6 +23,9 @@ public class UsuarioService {
 
     @Autowired
     private SenhaService senhaService;
+
+    @Autowired
+    private PerfilService perfilService;
 
     public UsuarioResponseDTO getUsuarioById(int id) {
         Usuario usuario = usuarioRepository.findById(id).get();
@@ -41,6 +46,7 @@ public class UsuarioService {
     }
 
     public Usuario createUsuario(UsuarioRequestDTO usuario) {
+        validarPerfil(usuario.getPerfilId());
         Usuario usuarioEntity = UsuarioMapper.toRequest(usuario);
 
         usuarioEntity.setDataCadastro(java.time.Instant.now());
@@ -51,14 +57,24 @@ public class UsuarioService {
     }
 
     public Usuario updateUsuario(int id, UsuarioRequestDTO usuario) {
+        validarPerfil(usuario.getPerfilId());
         Usuario usuarioEntity = usuarioRepository.findById(id).get();
 
         usuarioEntity.setNome(usuario.getNome());
         usuarioEntity.setEmail(usuario.getEmail());
         usuarioEntity.setIdClinica(usuario.getIdClinica());
+        usuarioEntity.setPerfilId(usuario.getPerfilId());
         usuarioEntity.setStatus(usuario.getStatus());
 
         return usuarioRepository.save(usuarioEntity);
+    }
+
+    private void validarPerfil(Long perfilId) {
+        try {
+            perfilService.getPerfilById(perfilId);
+        } catch (NoSuchElementException exception) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Informe um perfilId existente");
+        }
     }
 
     public Usuario updateUsuarioStatus(int id, boolean status) {

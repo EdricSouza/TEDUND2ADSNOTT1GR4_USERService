@@ -35,6 +35,16 @@ public class UsuarioResponseDTO {
 
     private int idClinica;
 
+    private Long perfilId;
+
+    public Long getPerfilId() {
+        return perfilId;
+    }
+
+    public void setPerfilId(Long perfilId) {
+        this.perfilId = perfilId;
+    }
+
     private boolean status;
 
     private String motivoInatividade;

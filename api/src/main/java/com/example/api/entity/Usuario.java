@@ -39,6 +39,17 @@ public class Usuario {
     @Column(name = "data_inativacao", nullable = true)
     private Instant dataInatividade;
 
+    @Column(name = "id_perfil")
+    private Long perfilId;
+
+    public Long getPerfilId() {
+        return perfilId;
+    }
+
+    public void setPerfilId(Long perfilId) {
+        this.perfilId = perfilId;
+    }
+
     public Long getId() {
         return id;
     }

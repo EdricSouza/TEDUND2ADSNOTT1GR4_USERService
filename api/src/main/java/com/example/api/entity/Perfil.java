@@ -17,4 +17,28 @@ public class Perfil {
     
     @Column (name = "descricao", nullable = false)
     private String descricaoPerfil;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNomePerfil() {
+        return nomePerfil;
+    }
+
+    public void setNomePerfil(String nomePerfil) {
+        this.nomePerfil = nomePerfil;
+    }
+
+    public String getDescricaoPerfil() {
+        return descricaoPerfil;
+    }
+
+    public void setDescricaoPerfil(String descricaoPerfil) {
+        this.descricaoPerfil = descricaoPerfil;
+    }
 }
